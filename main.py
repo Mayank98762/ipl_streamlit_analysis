@@ -12,6 +12,120 @@ matches=pd.read_csv("matches.csv")
 matches['team1'] = matches['team1'].str.replace('Rising Pune Supergiants', 'Rising Pune Supergiant')
 matches['team2'] = matches['team2'].str.replace('Rising Pune Supergiants', 'Rising Pune Supergiant')
 deliveries.rename(columns={'match_id': 'id'}, inplace=True)
+# --- Futuristic CSS Styling ---
+st.markdown(
+    """
+    <style>
+    /* Futuristic background gradient */
+    body, .stApp {
+        background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
+        color: #e0e0e0 !important;
+    }
+    /* Remove white gap at top */
+    header[data-testid="stHeader"] {
+        background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
+        box-shadow: none !important;
+        min-height: 0px !important;
+        height: 0px !important;
+        border: none !important;
+    }
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
+        color: #e0e0e0 !important;
+        border-right: 2px solid #00ffe7;
+        box-shadow: 2px 0 10px #00ffe7;
+    }
+    /* Sidebar text and radio/option color fix */
+    [data-testid="stSidebar"] * {
+        color: #e0e0e0 !important;
+    }
+    .stRadio label, .stSelectbox label, .stSidebar .st-bb, .stSidebar .st-c3, .stSidebar .st-c4 {
+        color: #e0e0e0 !important;
+    }
+    /* Title styling */
+    .stTitle, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
+        color: #00ffe7 !important;
+        text-shadow: 0 0 10px #00ffe7, 0 0 20px #00ffe7;
+        letter-spacing: 2px;
+    }
+    /* Subheader styling */
+    .stMarkdown h2, .stMarkdown h3 {
+        color: #39ff14 !important;
+        text-shadow: 0 0 8px #39ff14;
+    }
+    /* Dataframe styling */
+    .stDataFrame, .stTable {
+        background: rgba(20, 30, 48, 0.95) !important;
+        border-radius: 10px;
+        border: 1px solid #00ffe7;
+        color: #e0e0e0 !important;
+        box-shadow: 0 0 20px #00ffe733;
+    }
+    /* Button styling */
+    button, .stButton>button {
+        background: linear-gradient(90deg, #00ffe7 0%, #39ff14 100%) !important;
+        color: #232526 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-weight: bold;
+        box-shadow: 0 0 10px #00ffe7;
+        transition: 0.2s;
+    }
+    button:hover, .stButton>button:hover {
+        background: linear-gradient(90deg, #39ff14 0%, #00ffe7 100%) !important;
+        color: #fff !important;
+        box-shadow: 0 0 20px #39ff14;
+    }
+    /* Selectbox styling */
+    .stSelectbox>div>div {
+        background: #232526 !important;
+        color: #00ffe7 !important;
+        border: 1px solid #00ffe7 !important;
+        border-radius: 8px !important;
+    }
+    /* Dropdown menu styling for selectbox */
+    .stSelectbox [data-baseweb="select"] > div {
+        background: #232526 !important;
+        color: #00ffe7 !important;
+        border: 1px solid #00ffe7 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 10px #00ffe744;
+    }
+    .stSelectbox [data-baseweb="select"] .css-1n76uvr-option {
+        background: #232526 !important;
+        color: #00ffe7 !important;
+    }
+    .stSelectbox [data-baseweb="select"] .css-1n76uvr-option[aria-selected="true"] {
+        background: #00ffe7 !important;
+        color: #232526 !important;
+    }
+    .stSelectbox [data-baseweb="select"] .css-1n76uvr-option:hover {
+        background: #39ff14 !important;
+        color: #232526 !important;
+    }
+    /* Radio styling */
+    .stRadio>div {
+        background: #232526 !important;
+        color: #00ffe7 !important;
+        border-radius: 8px !important;
+        border: 1px solid #00ffe7 !important;
+    }
+    /* Chart backgrounds */
+    .stPlotlyChart, .stAltairChart, .stVegaLiteChart, .stPyplotGlobalChart {
+        background: #181c20 !important;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #00ffe733;
+    }
+    /* General text */
+    .stMarkdown p, .stMarkdown span, .stMarkdown div {
+        color: #e0e0e0 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("IPL Analysis")
 st.sidebar.image("IPL.png", use_container_width=True)
 #.dataframe(deliveries.head())
