@@ -29,6 +29,10 @@ st.markdown(
         height: 0px !important;
         border: none !important;
     }
+    /* Hide Streamlit top-right header buttons except sidebar nav */
+    header[data-testid="stHeader"] div[role="button"]:not([aria-label*="menu"]) {
+        display: none !important;
+    }
     /* Sidebar styling */
     [data-testid="stSidebar"] {
         background: linear-gradient(135deg, #232526 0%, #414345 100%) !important;
