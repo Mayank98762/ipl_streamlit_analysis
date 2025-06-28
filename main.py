@@ -17,7 +17,7 @@ st.sidebar.image("IPL.png", use_container_width=True)
 #.dataframe(deliveries.head())
 user_menu=st.sidebar.radio(
     "Select an option",
-    ("Total Wins", "Team-Wise Analysis", "Season-Wise Analysis", "Player Performance","Strike Rates")
+    ("Total Wins", "Team-Wise Analysis", "Season-Wise Analysis", "Player Performance","Strike Rates","Toss-Win Analysis","Best Partnerships")
 )
 
 if user_menu == "Total Wins":
@@ -260,5 +260,75 @@ elif user_menu == "Strike Rates":
         else:
             st.write("No data available for the selected player.")
 
+elif user_menu == "Toss-Win Analysis":
+    season = st.sidebar.selectbox("Select a Season", ("Overall","Season-Wise"))
+    team_options = ["Overall"] + list(matches['team1'].unique())
+    team = st.sidebar.selectbox("Select a Team", team_options)
+    if season == "Overall":
+        if team=="Overall":
+            st.subheader("Toss-Win Analysis Overall")
+            w.toss_win_analysis_overall(matches)
+        else:
+            st.subheader(f"Toss-Win Analysis for {team} Overall")
+            w.toss_win_analysis_season(matches, team)
+    elif season == "Season-Wise":
+        if team == "Overall":
+            st.subheader("Toss-Win Analysis: Season-Wise (All Teams)")
+            # Bar graph: x=season, y=number of matches where toss winner == match winner
+            season_counts = matches.groupby('season').apply(lambda x: (x['toss_winner'] == x['winner']).sum()).reset_index(name='count')
+            fig, ax = plt.subplots(figsize=(10, 6))
+            bars = ax.bar(season_counts['season'].astype(str), season_counts['count'], color='skyblue')
+            ax.set_xlabel('Season', fontsize=12)
+            ax.set_ylabel('Matches (Toss Winner = Match Winner)', fontsize=12)
+            ax.set_title('Number of Matches per Season where Toss Winner also Won the Match', fontsize=14)
+            plt.xticks(rotation=45)
+            ax.bar_label(bars, padding=3)
+            plt.tight_layout()
+            st.pyplot(fig)
+        else:
+            st.subheader(f"Toss-Win Analysis for {team} in Each Season")
+            # Bar graph: x=season, y=number of matches where toss winner == team and team also won the match
+            team_season = matches[matches['toss_winner'] == team]
+            team_season = team_season[team_season['winner'] == team]
+            season_counts = team_season.groupby('season').size().reset_index(name='count')
+            fig, ax = plt.subplots(figsize=(10, 6))
+            bars = ax.bar(season_counts['season'].astype(str), season_counts['count'], color='coral')
+            ax.set_xlabel('Season', fontsize=12)
+            ax.set_ylabel('Matches', fontsize=12)
+            ax.set_title(f'Number of Matches per Season where {team} Won Toss and Match', fontsize=14)
+            plt.xticks(rotation=45)
+            ax.bar_label(bars, padding=3)
+            plt.tight_layout()
+            st.pyplot(fig)
+            
+            
+   
+elif user_menu == "Best Partnerships":
+    how=st.sidebar.selectbox("Select a Type", ("Best of all Time","Season-Wise"))
+    if how=="Season-Wise":
+        season = st.sidebar.selectbox("Select a Season", matches['season'].unique())
+        full = pd.merge(deliveries, matches, on='id')
+        st.subheader(f"Best Partnerships in {season}")
+        df1=full[full['season']==season]
+        df2=df1.groupby(['batter','non_striker'])['total_runs'].sum().sort_values(ascending=False)
+        df2=df2.reset_index()
+        df2=pd.DataFrame(df2)
+        df2.columns=['Batter','Non Striker','Total Runs']
+        swbp=df2.head(50)
+        st.subheader("Top 50 Best Partnerships of the Season")  
+        st.dataframe(swbp)
+
+    if how=="Best of all Time":
+        partners=deliveries.groupby(['batter','non_striker'])['total_runs'].sum().sort_values(ascending=False)
+        partners=partners.reset_index()
+        partners=pd.DataFrame(partners)
+        partners.columns=['Batter','Non Striker','Total Runs']
+        best_partners=partners.head(50)
+        st.subheader("Top 50 Best Partnerships of All Time")
+        st.dataframe(best_partners)
+     
+
+        
 
 
+        

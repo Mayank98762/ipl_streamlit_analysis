@@ -145,3 +145,20 @@ def strike_rate_overall(df):
 
 
     
+def toss_win_analysis_overall(df):
+    toss_wins=df[df['toss_winner']==df['winner']]
+    st.write(f"There were {toss_wins.shape[0]} matches where the team that won the toss also won the match.")
+
+
+def toss_win_analysis_season(df, team):
+    df1=df[df['toss_winner']==team]
+    df2=df1[df1['toss_winner']==df1['winner']]
+    df2.shape[0]
+    st.write(f"{team} won the toss {df1.shape[0]} times and won {df2.shape[0]} of those matches overall.")
+
+
+def toss_win_analysis_seasonwise(df, season):
+    df1=df[df['season']==season]
+    df2=df1[df1['toss_winner']==df1['winner']]
+    df2.shape[0]
+    st.write(f"In {season}, there were {df2.shape[0]} matches where the team that won the toss also won the match, out of a total of {df1.shape[0]} matches played.")
