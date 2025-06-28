@@ -31,7 +31,12 @@ st.markdown(
     }
     /* Hide Streamlit top-right header buttons except sidebar nav */
     header[data-testid="stHeader"] div[role="button"]:not([aria-label*="menu"]) {
-        display: none !important;
+        position: fixed !important;
+        bottom: 10px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        display: block !important;
+        opacity: 0.8;;
     }
     /* Sidebar styling */
     [data-testid="stSidebar"] {
@@ -124,6 +129,13 @@ st.markdown(
     /* General text */
     .stMarkdown p, .stMarkdown span, .stMarkdown div {
         color: #e0e0e0 !important;
+    }
+    /* Move sidebar collapse button to bottom-left */
+    section[data-testid="stSidebar"] div[data-testid="stSidebarNav"] {
+        position: fixed !important;
+        bottom: 10px !important;
+        left: 10px !important;
+        z-index: 9999 !important;
     }
     </style>
     """,
