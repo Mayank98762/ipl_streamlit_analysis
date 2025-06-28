@@ -21,13 +21,27 @@ st.markdown(
         background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
         color: #e0e0e0 !important;
     }
-    /* Remove white gap at top */
+    /* Remove white gap at top and fix top-right overflow */
     header[data-testid="stHeader"] {
         background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
         box-shadow: none !important;
         min-height: 0px !important;
         height: 0px !important;
         border: none !important;
+        z-index: 1000 !important;
+        position: fixed !important;
+        width: 100vw !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        overflow-x: hidden !important;
+    }
+    /* Prevent top-right widgets from overflowing */
+    .st-emotion-cache-18ni7ap, .st-emotion-cache-1avcm0n, .st-emotion-cache-6qob1r, .stDeployButton, .stDeployButtonContainer {
+        max-width: 98vw !important;
+        right: 1vw !important;
+        left: auto !important;
+        overflow-x: auto !important;
     }
     /* Sidebar styling */
     [data-testid="stSidebar"] {
