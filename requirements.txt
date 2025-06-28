@@ -1,0 +1,12 @@
+<<<<<<< HEAD
+streamlit 
+pandas 
+numpy 
+matplotlib 
+=======
+streamlit 
+pandas 
+numpy 
+matplotlib 
+>>>>>>> a38121750678e085aae976e296139e04b6340e6a
+seaborn
